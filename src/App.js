@@ -32,7 +32,7 @@ function App() {
   return (
     <div>
       <h1>Expense tracker</h1>
-      <Expenses expenses={expenses} />
+      <Expenses items={expenses} />
     </div>
   );
 }
