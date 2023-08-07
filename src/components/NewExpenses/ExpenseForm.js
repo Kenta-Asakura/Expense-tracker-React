@@ -12,72 +12,105 @@ const ExpenseForm = () => {
   //   enteredDate: ''
   // });
 
-  // const titleChangeHandler = (event) => {
-  //   console.log(event.target.value); // logs the value
-  //   setEnteredTitle(event.target.value);
-  //   // setUserInput({
-  //   //   ...userInput,
-  //   //   enteredTitle: event.target.value
-  //   // })
-  //   // setUserInput((prevState) => {
-  //   //   return {
-  //   //     ...prevState, enteredTitle:event.target.value
-  //   //   }
-  //   // })
+  const titleChangeHandler = (event) => {
+    console.log(event.target.value); // logs the value
+    setEnteredTitle(event.target.value);
+    // setUserInput({
+    //   ...userInput,
+    //   enteredTitle: event.target.value
+    // })
+    // setUserInput((prevState) => {
+    //   return {
+    //     ...prevState, enteredTitle:event.target.value
+    //   }
+    // })
+  };
+
+  const amountChangeHandler = (event) => {
+    console.log(event.target.value);
+    setEnteredAmount(event.target.value);
+    // setUserInput({
+    //   ...userInput,
+    //   enteredAmount: event.target.value
+    // })
+    // setUserInput((prevState) => {
+    //   return {
+    //     ...prevState, enteredAmount:event.target.value
+    //   }
+    // })
+  };
+
+  const dateChangeHandler = (event) => {
+    console.log(event.target.value);
+    setEnteredDate(event.target.value);
+    // setUserInput((prevState) => {
+    //   return {
+    //     ...prevState, enteredDate:event.target.value
+    //   }
+    // })
+  };
+
+  // const inputChangeHandler = (identifier, value) => {
+  //   if (identifier === 'title') {
+  //     setEnteredTitle(value);
+  //     console.log(value);
+  //   } else if (identifier === 'date') {
+  //     setEnteredDate(value);
+  //     console.log(value);
+  //   } else {
+  //     setEnteredAmount(value);
+  //     console.log(value);
+  //   }
   // };
 
-  // const amountChangeHandler = (event) => {
-  //   console.log(event.target.value);
-  //   setEnteredAmount(event.target.value);
-  //   // setUserInput({
-  //   //   ...userInput,
-  //   //   enteredAmount: event.target.value
-  //   // })
-  //   // setUserInput((prevState) => {
-  //   //   return {
-  //   //     ...prevState, enteredAmount:event.target.value
-  //   //   }
-  //   // })
-  // };
+  const submitHandler = (event) => {
+    event.preventDefault();
 
-  // const dateChangeHandler = (event) => {
-  //   console.log(event.target.value);
-  //   setEnteredDate(event.target.value);
-  //   // setUserInput((prevState) => {
-  //   //   return {
-  //   //     ...prevState, enteredDate:event.target.value
-  //   //   }
-  //   // })
-  // };
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate)
+    };
 
-  const inputChangeHandler = (identifier, value) => {
-    if (identifier === 'title') {
-      setEnteredTitle(value);
-      console.log(value);
-    } else if (identifier === 'date') {
-      setEnteredDate(value);
-      console.log(value);
-    } else {
-      setEnteredAmount(value);
-      console.log(value);
-    }
+    setEnteredTitle('');
+    setEnteredAmount('');
+    setEnteredDate('');
+    console.log(expenseData); // Check the stored data
   };
 
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          {/* <input type="text" onChange={titleChangeHandler} /> */}
-          <input type="text" onChange={(event) => inputChangeHandler('title', event.target.value)} />
+          <input
+            type="text"
+            value={enteredTitle}
+            onChange={titleChangeHandler}
+          />
+          {/* <input type="text" onChange={(event) => inputChangeHandler('title', event.target.value)} /> */}
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
-          <input type="number" min="0.01" step="0.01" onChange={(event) => inputChangeHandler('amount', event.target.value)}/>
+          <input
+            type="number"
+            min="0.01"
+            step="0.01"
+            value={enteredAmount}
+            onChange={amountChangeHandler}
+          />
+          {/* <input type="number" min="0.01" step="0.01" onChange={(event) => inputChangeHandler('amount', event.target.value)}/> */}
         </div>
         <div className="new-expense__control">
           <label>Date</label>
-          <input type="date" min="2019-01-01" max="2022-12-31" onChange={(event) => inputChangeHandler('date', event.target.value)} />
+          <input
+            type="date"
+            min="2019-01-01"
+            max="2022-12-31"
+            value={enteredDate}
+            onChange={dateChangeHandler}
+          />
+          {/* <input type="date" min="2019-01-01" max="2022-12-31" onChange={(event) => inputChangeHandler('date', event.target.value)} /> */}
         </div>
       </div>
       <div className="new-expense__actions">
